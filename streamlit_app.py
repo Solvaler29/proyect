@@ -4,7 +4,7 @@ import tensorflow as tf
 from PIL import Image, ImageOps
 import numpy as np
 
-st.title("📊 Data evaluation app")
+st.title("📊 Analizar imagenes")
 
 st.write(
     "We are so glad to see you here. ✨ "
