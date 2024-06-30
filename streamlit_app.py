@@ -31,7 +31,7 @@ def import_and_predict(image_data, model):
     prediction = model.predict(img_reshape)
     return prediction
 
-model = tf.keras.models.load_model('my_model2.h5')
+model = tf.keras.models.load_model('')
 
 st.write("""
          # ***Glaucoma detector***
@@ -59,7 +59,7 @@ else:
                  ## **Prediction:** You are affected by Glaucoma. Please consult an ophthalmologist as soon as possible.
                  """
                  )
-                 
+
 data = {
     "Questions": [
         "Who invented the internet?",
