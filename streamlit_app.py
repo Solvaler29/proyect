@@ -4,6 +4,7 @@ import tensorflow as tf
 from PIL import Image
 import numpy as np
 import os
+import base64
 
 # En esta parte tenemos que ver si el modelo que usaremos va funcionar 
 try:
@@ -14,6 +15,10 @@ except Exception as e:
     model = None  # Para que no afecte lo demas del codigo se poner none.
 
 st.title("Detección de retinopatías diabéticas")
+objetivo = '''
+✨El objetivo principal de este proyecto es analizar en profundidad cómo las imágenes del fondo del ojo proporcionadas por el usuario pueden ser utilizadas para la detección de retinopatía diabética empleando el modelo de red neuronal profunda ResNet50.✨
+'''
+st.write(objetivo)
 
 def preprocess_image(image, target_size=(224, 224)):
   image = image.resize(target_size)
@@ -39,20 +44,33 @@ def process_images_from_folder(folder_path):
             
         else:
             imagenes_negativas.append((image, filename, prediction)) 
-           
+                
     if imagenes_positivas:
         st.subheader("Imágenes con retinopatía:")
-        for image, filename, prediction in imagenes_positivas:
-            st.image(image, width=200)
+        col1, col2, col3 = st.columns(3)
+        for i, (image, filename, prediction) in enumerate(imagenes_positivas):
+            if i % 3 == 0:
+                col1.image(image)
+            elif i % 3 == 1:
+                col2.image(image)
+            else:
+                col3.image(image)
     if imagenes_negativas:
-        st.subheader("Imágenes sin retinopatía:")
-        for image, filename, prediction in imagenes_negativas:
-            st.image(image, width=200)
+        st.subheader("Imágenes que no tienen retinopatía:")
+        col1, col2, col3 = st.columns(3)  # Crea un contenedor para una fila de imágenes
+        for i, (image, filename, prediction) in enumerate(imagenes_negativas):
+            if i % 3 == 0:
+                col1.image(image)
+            elif i % 3 == 1:
+                col2.image(image)
+            else:
+                col3.image(image)
+
 
 # Selector de carpetas
 ruta_carpeta = "/workspaces/proyect/100_Imagenes"
 
-st.write("Sube una imagen para saber si tiene:")
+st.subheader("Sube una imagen para saber si tiene:", divider='violet')
 uploaded_file = st.file_uploader("Eligue una imagen...", type="")
 
 # Código original para subir una sola imagen (opcional)
@@ -67,11 +85,11 @@ if uploaded_file is not None:
             # Interpret the prediction
     
             if prediction > 0.0300 :  # Adjust threshold based on your model's output
-                st.success("Predicted class: Si tienes")
+                st.success("Predicción: Tiene retinopatías diabéticas")
             else:
-                st.warning("Predicted class: Está sano")
+                st.warning("Predicción: Está sano")
 else:
         st.info("Sube una foto para clasificar")
 # Procesar la carpeta si se ha seleccionado
-st.write("Clasificacion de 100 imagenes:")
+st.header("Clasificación de 100 imagenes:", divider='rainbow')
 process_images_from_folder(ruta_carpeta)
