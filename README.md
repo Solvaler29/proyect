@@ -1,16 +1,14 @@
-# 📊 Data evaluation template
+# 📊 Detección de retinopatías diabéticas
 
-A simple Streamlit app showing how to evaluate and annotate data, using dataframes
-and charts. 
-
+El objetivo principal de este proyecto es analizar en profundidad cómo las imágenes del fondo del ojo proporcionadas por el usuario pueden ser utilizadas para la detección de retinopatía diabética
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://data-evaluation-template.streamlit.app/)
 
-### How to run it on your own machine
+### PAra que funcione
 
-1. Install the requirements
+1. Install necesaria
 
    ```
-   $ pip install -r requirements.txt
+   $ pip install tensorflow
    ```
 
 2. Run the app
