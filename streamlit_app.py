@@ -19,7 +19,6 @@ objetivo = '''
 ✨El objetivo principal de este proyecto es analizar en profundidad cómo las imágenes del fondo del ojo proporcionadas por el usuario pueden ser utilizadas para la detección de retinopatía diabética empleando el modelo de red neuronal profunda ResNet50.✨
 '''
 st.write(objetivo)
-
 def preprocess_image(image, target_size=(224, 224)):
   image = image.resize(target_size)
   image = np.array(image)  # Normalizar para que sea de 0 y 1
