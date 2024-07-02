@@ -4,8 +4,6 @@ import tensorflow as tf
 from PIL import Image
 import numpy as np
 import os
-import base64
-
 # En esta parte tenemos que ver si el modelo que usaremos va funcionar 
 try:
     model = tf.keras.models.load_model('my_40_model.h5')
@@ -14,7 +12,9 @@ except Exception as e:
     st.error(f"Error al subir el model, cargar denuevo: {e}")
     model = None  # Para que no afecte lo demas del codigo se poner none.
 
-st.title("Detección de retinopatías diabéticas")
+
+st.title("Detección de retinopatÍas diabéticas")
+
 objetivo = '''
 ✨El objetivo principal de este proyecto es analizar en profundidad cómo las imágenes del fondo del ojo proporcionadas por el usuario pueden ser utilizadas para la detección de retinopatía diabética empleando el modelo de red neuronal profunda ResNet50.✨
 '''
@@ -64,9 +64,7 @@ def process_images_from_folder(folder_path):
             elif i % 3 == 1:
                 col2.image(image)
             else:
-                col3.image(image)
-
-
+                col3.image(image)               
 # Selector de carpetas
 ruta_carpeta = "/workspaces/proyect/100_Imagenes"
 
@@ -77,7 +75,6 @@ uploaded_file = st.file_uploader("Eligue una imagen...", type="")
 if uploaded_file is not None:
         image = Image.open(uploaded_file)
         st.image(image, caption='Imagen ya subida', use_column_width=True)
-  
         if model is not None:
             preprocessed_image = preprocess_image(image)
 
@@ -89,7 +86,7 @@ if uploaded_file is not None:
             else:
                 st.warning("Predicción: Está sano")
 else:
-        st.info("Sube una foto para clasificar")
-# Procesar la carpeta si se ha seleccionado
-st.header("Clasificación de 100 imagenes:", divider='rainbow')
+    st.info("Sube una foto o varias para clasificar.")
+
+st.write("Clasificacion de 100 imagenes:")
 process_images_from_folder(ruta_carpeta)
