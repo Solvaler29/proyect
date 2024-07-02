@@ -43,11 +43,11 @@ def process_images_from_folder(folder_path):
     if imagenes_positivas:
         st.subheader("Imágenes con retinopatía:")
         for image, filename, prediction in imagenes_positivas:
-            st.image(image)
+            st.image(image, width=200)
     if imagenes_negativas:
         st.subheader("Imágenes sin retinopatía:")
         for image, filename, prediction in imagenes_negativas:
-            st.image(image)
+            st.image(image, width=200)
 
 # Selector de carpetas
 ruta_carpeta = "/workspaces/proyect/100_Imagenes"
